@@ -1,0 +1,4 @@
+echo "Starting Mongo!"
+cd /c/Program\ Files/MongoDB\ 2.6\ Standard/bin
+mongod.exe --dbpath /c/test/mongod/data
+echo "Mongo should be started"
