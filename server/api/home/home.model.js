@@ -5,6 +5,7 @@ var mongoose = require('mongoose'),
 
 var HomeSchema = new Schema({
   name: String,
+  postcode: String,
   info: String,
   active: Boolean
 });

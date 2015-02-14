@@ -13,9 +13,7 @@
     <div class="col-lg-12">
       <h1 class="page-header">Latest Homes Added:</h1>
       <div ng-repeat="home in homes">
-        <p>{{home.name}}</p>
-
-
+        <p>{{home | json}}</p>
       </div>
     </div>
     <div class="col-lg-12">

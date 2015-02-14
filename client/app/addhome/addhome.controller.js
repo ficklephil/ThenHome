@@ -5,11 +5,14 @@ angular.module('thenHomeApp')
     $scope.message = 'Hello';
 
     $scope.home = {
-      name:'Philip'
+      name:'Philip',
+      postcode:'tw3'
     };
 
     $scope.addButtonHandler = function(){
       $log.debug('add Btn Handler');
+
+      //console.log($scope.home);
 
       Home.addHome($scope.home);
     };
