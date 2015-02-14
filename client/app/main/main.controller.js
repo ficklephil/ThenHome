@@ -9,6 +9,10 @@ angular.module('thenHomeApp')
       socket.syncUpdates('thing', $scope.awesomeThings);
     });
 
+    $http.get('/api/homes').success(function(homes){
+      $scope.homes = homes;
+    });
+
     $scope.addThing = function() {
       if($scope.newThing === '') {
         return;
