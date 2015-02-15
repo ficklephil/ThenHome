@@ -15,3 +15,4 @@ Allow a user to view those properties x
 
 Add Simple tests for the above
 Add Geolocation
+Add Update, and Delete.
