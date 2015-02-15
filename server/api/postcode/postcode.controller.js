@@ -1,33 +1,23 @@
 'use strict';
 
 var _ = require('lodash');
-var q = require('q');
+var Q = require('q');
 var request = require('request');
 var Postcode = require('./postcode.model');
 
 // Get a single postcode
 exports.show = function(req, res) {
 
-  var deferred = q.d
-
-  console.log('In Postcode Controller node');
-
-  console.log(req.params.id);
-
   //TODO : Use a Promise here
+  //TODO : Get some error handling
+  //TODO : Get some tests
   request('http://postcodes.io/postcodes/' + req.params.id, function(error,response,body){
     if(!error && response.statusCode == 200){
-      console.log(body);
       res.json(JSON.parse(body));
+    }else{
+      res.json(error);
     }
   });
-
-
-  //Postcode.findById(req.params.id, function (err, postcode) {
-  //  if(err) { return handleError(res, err); }
-  //  if(!postcode) { return res.send(404); }
-  //  return res.json(postcode);
-  //});
 };
 
 function handleError(res, err) {

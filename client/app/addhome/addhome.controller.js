@@ -11,18 +11,28 @@ angular.module('thenHomeApp')
 
     $scope.home = {
       name:'Philip',
-      postcode:'tw3 2hb',
-      roadName:'Hello'
+      postcode:'',
+      postcodeData:''
+    };
+
+    $scope.setMapPosition = function(lat, lng){
+      $scope.map = { center: { latitude: lat, longitude: lng }, zoom: 16 };
     };
 
     $scope.getAddress = function(postcode){
 
       PostcodeService.getPostcodeData(postcode).then(function(data){
           $log.debug('postcode data', data);
+
+          var postcodeData = data.result;
+          $scope.home.postcodeData = postcodeData;
+          $scope.setMapPosition(postcodeData.latitude, postcodeData.longitude);
+
+
         }, function(reason){
           $log.debug('failing', reason);
         }, function(update){
-          $log.debug('got notification');
+          $log.debug('got notification', update);
         })
     };
 

@@ -9,16 +9,17 @@ angular.module('thenHomeApp')
 
     return {
       getPostcodeData: function(postcode){
+
         var deferred = $q.defer();
 
         $http.get('/api/postcodes/' + postcode)
           .success(function(data){
-            $log.debug('data', data);
             deferred.resolve(data);
           }).error(function(err){
-            $log.debug('err', err);
             deferred.reject(err);
-          })
+          });
+
+        return deferred.promise;
       }
     }
   });
