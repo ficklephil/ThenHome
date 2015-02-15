@@ -18,6 +18,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/postcode/postcode.socket').register(socket);
   require('../api/home/home.socket').register(socket);
   require('../api/thing/thing.socket').register(socket);
 }

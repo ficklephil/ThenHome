@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('thenHomeApp')
-  .service('Home', function ($q, $log, $http) {
+  .service('HomeService', function ($q, $log, $http) {
 
     return {
       addHome: function(home){

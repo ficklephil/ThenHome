@@ -10,6 +10,7 @@ angular.module('thenHomeApp')
       });
   });
 
+//TODO : Move this to it's own file
 angular.module('thenHomeApp')
   .config(function(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({

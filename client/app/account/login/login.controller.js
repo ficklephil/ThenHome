@@ -2,7 +2,12 @@
 
 angular.module('thenHomeApp')
   .controller('LoginCtrl', function ($scope, Auth, $location, $window) {
-    $scope.user = {};
+
+    //TODO: Remove when on prod
+    $scope.user = {
+      email: 'test@test.com',
+      password: 'test'
+    };
     $scope.errors = {};
 
     $scope.login = function(form) {
@@ -14,7 +19,7 @@ angular.module('thenHomeApp')
           password: $scope.user.password
         })
         .then( function() {
-          // Logged in, redirect to home
+          // Logged in, redirect to homeService
           $location.path('/');
         })
         .catch( function(err) {

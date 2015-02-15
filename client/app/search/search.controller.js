@@ -8,6 +8,4 @@ angular.module('thenHomeApp')
       console.log('Google maps is ready');
       $scope.map = { center: { latitude: 51.4790383, longitude: -0.2271019 }, zoom: 11 };
     });
-
-
   });

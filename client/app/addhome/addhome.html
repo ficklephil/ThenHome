@@ -16,9 +16,20 @@
   </div>
   <form class="thing-form">
    <p class="input-group">
-      <input type="text" class="form-control" ng-model="home.name" placeholder="Your name">
-      <input type="text" class="form-control" ng-model="home.postcode" placeholder="First three letters of Postcode">
-      <button ng-click="addButtonHandler()" type="submit" class="btn btn-primary">Add New</button>
+     <input type="text" class="form-control" ng-model="home.postcode" placeholder="First three letters of Postcode">
+     <button ng-click="populateAddressBtnHandler()">Populate Address</button>
+
+
+
+
+     <input type="text" class="form-control" ng-model="home.name" placeholder="Your name">
+     <input type="text" class="form-control" ng-model="home.road" placeholder="Road name">
+
+      <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+
+
+
+      <button ng-click="addBtnHandler()" type="submit" class="btn btn-primary">Add New</button>
     </p>
   </form>
 </div>

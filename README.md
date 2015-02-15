@@ -13,6 +13,14 @@ TODO
 Allow a user to upload property data. x
 Allow a user to view those properties x
 
-Add Simple tests for the above
+Add Simple tests for the above x
+
+Add Postcode
+Add Roadname
+Add Fav School,
+Add Fav Indian Resturant
+
 Add Geolocation
+
+
 Add Update, and Delete.

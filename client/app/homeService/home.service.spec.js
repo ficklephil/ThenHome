@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Service: home', function () {
+describe('Service: homeService', function () {
 
   // load the service's module
   beforeEach(module('thenHomeApp'));
@@ -12,7 +12,7 @@ describe('Service: home', function () {
   }));
 
   //it('should do something', function () {
-  //  expect(!!home).toBe(true);
+  //  expect(!!homeService).toBe(true);
   //});
 
 });
