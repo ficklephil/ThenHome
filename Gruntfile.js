@@ -70,8 +70,8 @@ module.exports = function (grunt) {
         tasks: ['injector:css']
       },
       mochaTest: {
-        files: ['server/**/*.spec.js'],
-        tasks: ['env:test', 'mochaTest']
+        files: ['server/**/*.spec.js','server/**/*.controller.js' ],
+        tasks: ['test-node']
       },
       jsTest: {
         files: [
@@ -638,6 +638,14 @@ module.exports = function (grunt) {
       'test:server',
       'test:client'
     ]);
+  });
+
+  grunt.registerTask('test-node', function() {
+      return grunt.task.run([
+        'env:all',
+        'env:test',
+        'mochaTest'
+      ]);
   });
 
   grunt.registerTask('build', [

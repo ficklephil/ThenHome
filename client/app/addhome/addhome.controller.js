@@ -28,7 +28,6 @@ angular.module('thenHomeApp')
           $scope.home.postcodeData = postcodeData;
           $scope.setMapPosition(postcodeData.latitude, postcodeData.longitude);
 
-
         }, function(reason){
           $log.debug('failing', reason);
         }, function(update){

@@ -12,8 +12,8 @@ describe('Service: postcodeService', function () {
   }));
 
   //TODO : Test using $httpBackend?
-  it('should return a JSON response from the service', function () {
-    expect(!!postcodeService).toBe(true);
-  });
+  //it('should return a JSON response from the service', function () {
+  //  expect(!!postcodeService).toBe(true);
+  //});
 
 });
