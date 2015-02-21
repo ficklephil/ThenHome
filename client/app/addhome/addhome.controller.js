@@ -1,45 +1,56 @@
 'use strict';
 
 angular.module('thenHomeApp')
-  .controller('AddhomeCtrl', function ($scope, HomeService, $log, uiGmapGoogleMapApi, PostcodeService) {
-    $scope.message = 'Hello';
+    .controller('AddhomeCtrl', function ($scope, HomeService, $log, uiGmapGoogleMapApi, PostcodeService) {
+        $scope.message = 'Hello';
 
-    uiGmapGoogleMapApi.then(function(maps){
+    uiGmapGoogleMapApi.then(function (maps) {
       console.log('Google maps is ready');
-      $scope.map = { center: { latitude: 51.4790383, longitude: -0.2271019 }, zoom: 11 };
+      $scope.map = {center: {latitude: 51.4790383, longitude: -0.2271019}, zoom: 11};
     });
 
     $scope.home = {
-      name:'Philip',
-      postcode:'',
-      postcodeData:''
+      name: 'Philip',
+      postcode: '',
+      postcodeData: ''
     };
 
-    $scope.setMapPosition = function(lat, lng){
-      $scope.map = { center: { latitude: lat, longitude: lng }, zoom: 16 };
+    $scope.setMapPosition = function (lat, lng) {
+      $scope.map = {center: {latitude: lat, longitude: lng}, zoom: 16};
     };
 
-    $scope.getAddress = function(postcode){
+    $scope.getAddress = function (postcode) {
 
-      PostcodeService.getPostcodeData(postcode).then(function(data){
-          $log.debug('postcode data', data);
+      PostcodeService.getPostcodeData(postcode).then(function (data) {
+        $log.debug('postcode data', data);
 
-          var postcodeData = data.result;
-          $scope.home.postcodeData = postcodeData;
-          $scope.setMapPosition(postcodeData.latitude, postcodeData.longitude);
+        var postcodeData = data.result;
 
-        }, function(reason){
-          $log.debug('failing', reason);
-        }, function(update){
-          $log.debug('got notification', update);
-        })
+        $scope.home.postcodeData = postcodeData;
+        $scope.postcodeError = false;
+
+        $scope.setMapPosition(postcodeData.latitude, postcodeData.longitude);
+
+      }, function (reason) {
+        $scope.postcodeError = true;
+        $log.debug('failing', reason);
+      }, function (update) {
+        $log.debug('got notification', update);
+      })
     };
 
-    $scope.populateAddressBtnHandler = function(){
+    $scope.populateAddressBtnHandler = function () {
       $scope.getAddress($scope.home.postcode);
     };
 
-    $scope.addBtnHandler = function(){
-      HomeService.addHome($scope.home);
+    $scope.addBtnHandler = function () {
+      HomeService.addHome($scope.home).then(function(data){
+        console.log('data');
+        console.log(data);
+      }, function(reason){
+        $log.debug('failing', reason);
+      }, function (update) {
+        $log.debug('got notification', update);
+      })
     };
   });

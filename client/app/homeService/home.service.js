@@ -11,7 +11,9 @@ angular.module('thenHomeApp')
           deferred.resolve(data);
         }).error(function(err){
           deferred.reject(err);
-        })
+        });
+
+        return deferred.promise;
       }
     }
   });
