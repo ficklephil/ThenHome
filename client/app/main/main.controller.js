@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('thenHomeApp')
-  .controller('MainCtrl', function ($scope, $http, socket) {
+  .controller('MainCtrl', function ($scope, $http, socket, uiGmapGoogleMapApi) {
     $scope.awesomeThings = [];
 
     $http.get('/api/things').success(function(awesomeThings) {
@@ -13,6 +13,14 @@ angular.module('thenHomeApp')
       $scope.homes = homes;
     });
 
+    $scope.getGoogleMapImage = function(lat,lng){
+      return 'https://maps.googleapis.com/maps/api/staticmap?center='+lat+','+lng+'&zoom=14&size=150x150';
+    };
+
+    $scope.getGoogleMapStreetViewImage = function(lat,lng){
+      return 'https://maps.googleapis.com/maps/api/streetview?size=150x150&location='+lat+','+lng;
+    };
+
     $scope.addThing = function() {
       if($scope.newThing === '') {
         return;
@@ -20,6 +28,11 @@ angular.module('thenHomeApp')
       $http.post('/api/things', { name: $scope.newThing });
       $scope.newThing = '';
     };
+
+    uiGmapGoogleMapApi.then(function(maps){
+      console.log('Google maps is ready');
+      $scope.map = { center: { latitude: 51.4790383, longitude: -0.2271019 }, zoom: 11 };
+    });
 
     $scope.deleteThing = function(thing) {
       $http.delete('/api/things/' + thing._id);

@@ -12,6 +12,7 @@ angular.module('thenHomeApp')
     $scope.home = {
       name: 'Philip',
       email: 'sf',
+      price:'342424',
       postcode: '',
       longitude: '',
       latitude: '',

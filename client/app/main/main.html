@@ -17,9 +17,26 @@
   <div class="row">
     <div class="col-lg-12">
       <h1 class="page-header">Latest Homes Added:</h1>
-      <div ng-repeat="home in homes">
-        <p>{{home | json}}</p>
+
+
+      <div class="row">
+
+        <div class="col-md-2 home-item" ng-repeat="home in homes" >
+          <img ng-src="{{getGoogleMapImage(home.latitude, home.longitude)}}">
+          <img ng-src="{{getGoogleMapStreetViewImage(home.latitude, home.longitude)}}">
+          <p>{{home.price}}</p>
+          <p>{{home.adminDistrict}}</p>
+          <p>{{home.region}}</p>
+        </div>
+        <!--<div ng-repeat="home in homes">-->
+  <!---->
+          <!--<p>Region</p>-->
+
+          <!--&lt;!&ndash;<p>{{home | json}}</p>&ndash;&gt;-->
+        <!--</div>-->
+
       </div>
+
     </div>
     <div class="col-lg-12">
       <h1 class="page-header">Features:</h1>
