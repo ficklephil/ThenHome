@@ -65,7 +65,7 @@ describe('GET /api/postcodes', function() {
       });
   });
 
-  it('should respond with postcode details if there is a space between the postcode ie. TW31RH', function(done) {
+  it('should respond with postcode details if there is no space between the postcode ie. TW31RH', function(done) {
     request(app)
       .get('/api/postcodes/tw31rh')
       .expect(200)//TODO: For some reason this is passing when the status back is 404 issue around supertest perhaps?
