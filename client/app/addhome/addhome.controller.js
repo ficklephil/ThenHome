@@ -11,8 +11,12 @@ angular.module('thenHomeApp')
 
     $scope.home = {
       name: 'Philip',
+      email: 'sf',
       postcode: '',
-      postcodeData: ''
+      longitude: '',
+      latitude: '',
+      adminDistrict: '',
+      region:''
     };
 
     $scope.setMapPosition = function (lat, lng) {
@@ -26,7 +30,12 @@ angular.module('thenHomeApp')
 
         var postcodeData = data.result;
 
-        $scope.home.postcodeData = postcodeData;
+        $scope.home.postcode = postcodeData.postcode;
+        $scope.home.longitude = postcodeData.longitude;
+        $scope.home.latitude = postcodeData.latitude;
+        $scope.home.adminDistrict = postcodeData.admin_district;
+        $scope.home.region = postcodeData.region;
+
         $scope.postcodeError = false;
 
         $scope.setMapPosition(postcodeData.latitude, postcodeData.longitude);
@@ -44,11 +53,14 @@ angular.module('thenHomeApp')
     };
 
     $scope.addBtnHandler = function () {
+
+      //does not know admin district here
+      $log.debug($scope.home);
+
       HomeService.addHome($scope.home).then(function(data){
-        console.log('data');
-        console.log(data);
+        $log.debug('Successfully Added ', data);
       }, function(reason){
-        $log.debug('failing', reason);
+        $log.debug('Unable to add Home', reason);
       }, function (update) {
         $log.debug('got notification', update);
       })
