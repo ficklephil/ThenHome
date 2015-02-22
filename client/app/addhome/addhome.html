@@ -1,42 +1,46 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
-  </div>
-</header>
 
 <div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      This is the addhome view.
+    <div class="row">
+        <div class="col-lg-12">
+            This is the addhome view.
+        </div>
     </div>
-  </div>
-  <form class="thing-form">
-   <p class="input-group">
-    <input type="text" class="form-control" ng-model="home.name" placeholder="Your name">
-    <input type="text" class="form-control" ng-model="home.postcode" placeholder="Postcode">
-    <button ng-click="populateAddressBtnHandler()">Populate Address</button>
-    <p ng-show="postcodeError" class="error-text">Postcode Not Found</p>
+    <form class="thing-form">
+        <p class="input-group">
+            <input type="text" class="form-control" ng-model="home.name" placeholder="Your name">
+            <input type="text" class="form-control" ng-model="home.postcode" placeholder="Postcode">
+            <button ng-click="populateAddressBtnHandler()">Populate Address</button>
+        <p ng-show="postcodeError" class="error-text">Postcode Not Found</p>
+        <p>{{home.postcodeData.postcode}}</p>
+        <p>{{home.postcodeData.admin_district}}</p>
+        <p>{{home.postcodeData.region}}</p>
+        <p>{{home.postcodeData.country}}</p>
+        <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+    </form>
 
-    <p>{{home.postcodeData.postcode}}</p>
-    <p>{{home.postcodeData.admin_district}}</p>
-    <p>{{home.postcodeData.region}}</p>
-     <p>{{home.postcodeData.country}}</p>
+    <h4>Add Images</h4>
 
-     <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+    <input type="text" ng-model="username"></br></br>
+    <input type="checkbox" ng-model="multiple">upload multiple file</br></br>
+    watching model:
+    <div class="button" ng-file-select ng-model="files" ng-multiple="multiple">Select File</div>
+    on file change:
+    <div class="button" ng-file-select ng-file-change="upload($files)" ng-multiple="multiple">Select File</div>
+    Drop File:
+    <div ng-file-drop ng-file-select ng-model="files" class="drop-box"
+         drag-over-class="dragover" ng-multiple="true" allow-dir="true"
+         accept="image/*,application/pdf">Drop pdfs or images here or click to upload</div>
+    <div ng-no-file-drop>File Drag/Drop is not supported for this browser</div>
+    <ul>
+        <li ng-repeat="f in files" style="font:smaller">{{f.name}}</li>
+    </ul>
 
-     <button ng-click="addBtnHandler()" type="submit" class="btn btn-primary">Add New</button>
-    </p>
-  </form>
-</div>
-
-<footer class="footer">
-  <div class="container">
-    <p>Angular Fullstack v2.0.13 |
-      <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
-      <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
-  </div>
-</footer>
+    <footer class="footer">
+        <div class="container">
+            <p>Angular Fullstack v2.0.13 |
+                <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
+                <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
+        </div>
+    </footer>

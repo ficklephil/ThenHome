@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('thenHomeApp')
-    .controller('AddhomeCtrl', function ($scope, HomeService, $log, uiGmapGoogleMapApi, PostcodeService) {
+    .controller('AddhomeCtrl', function ($scope, HomeService, $log, uiGmapGoogleMapApi, PostcodeService, $upload) {
         $scope.message = 'Hello';
 
     uiGmapGoogleMapApi.then(function (maps) {
@@ -66,4 +66,33 @@ angular.module('thenHomeApp')
         $log.debug('got notification', update);
       })
     };
+
+    $scope.$watch('files', function () {
+        $scope.upload($scope.files);
+    });
+
+    $scope.upload = function (files) {
+        if (files && files.length) {
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                $upload.upload({
+                    url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+                    fields: {
+                        'username': $scope.username
+                    },
+                    file: file
+                }).progress(function (evt) {
+                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                    console.log('progress: ' + progressPercentage + '% ' +
+                        evt.config.file.name);
+                }).success(function (data, status, headers, config) {
+                    console.log('file ' + config.file.name + 'uploaded. Response: ' +
+                        JSON.stringify(data));
+                });
+            }
+        }
+    };
+
+
+
   });
