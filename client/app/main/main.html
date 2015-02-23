@@ -21,10 +21,9 @@
 
 
             <div class="row">
-
                 <div class="col-md-2 home-item" ng-repeat="home in homes">
-                    <img ng-src="{{getGoogleMapImage(home.latitude, home.longitude)}}">
-                    <img ng-src="{{getGoogleMapStreetViewImage(home.latitude, home.longitude)}}">
+                    <img ng-src="{{getGoogleMapImage(home.latitude, home.longitude, 150, 150)}}">
+                    <img ng-src="{{getGoogleMapStreetViewImage(home.latitude, home.longitude, 150, 150)}}">
                     <p>{{home.price}}</p>
                     <p>{{home.adminDistrict}}</p>
                     <p>{{home.region}}</p>
