@@ -1,68 +1,42 @@
 'use strict';
 
 angular.module('thenHomeApp')
-    .controller('SearchCtrl', function ($scope, uiGmapGoogleMapApi, HomeService, $log) {
+    .controller('SearchCtrl', function ($scope, uiGmapGoogleMapApi, HomeService, $log, $location) {
         $scope.message = 'Hello';
 
-        uiGmapGoogleMapApi.then(function (maps) {
-            console.log('Google maps is ready');
-            $scope.map = { center: { latitude: 51.4790383, longitude: -0.2271019 }, zoom: 11 };
-//            $scope.map = {center: {latitude: 40.1451, longitude: -99.6680 }, zoom: 4 };
-        });
+            uiGmapGoogleMapApi.then(function (maps) {
+                console.log('Google maps is ready');
+                $scope.map = { center: { latitude: 51.4790383, longitude: -0.2271019 }, zoom: 11 };
+            });
 
-//        $scope.marker = {
-//            id: 0,
-//            coords: {
-//                latitude: 40.1451,
-//                longitude: -99.6680
-//            },
-//            options: { draggable: true }
-//        };
-
+        function addMarkerClickEvent(){
+            $scope.markerEvents = {
+                click: function (marker, eventName, home, args) {
+                    $location.path('/home/'+home.id);
+                }
+            }
+        }
 
         HomeService.getHomes().then(function(data){
-//
-//            var homeCoordinates = {};
-            var homes = [];
 
-            //Definetly make this easier ie. don't even have the homeCoordinates Object
+            var markers = [];
+
             for(var index in data){
-
-                $log.debug(Number(data[index].latitude));
-                $log.debug(Number(data[index].longitude));
-
-                $scope.marker = {
-                    id: 0,
-                    coords: {
-                        latitude: Number(data[index].latitude),
-                        longitude: Number(data[index].longitude)
-                    }
+                var marker = {
+                    latitude: Number(data[index].latitude),
+                    longitude: Number(data[index].longitude),
+                    id: data[index]._id
                 };
-
-
-//                homeCoordinates = {
-//                    latitude: data[index].latitude,
-//                    longitude: data[index].longitude,
-//                    title:'yo',
-//                    _id: data[index]._id
-//                };
-//
-//                homes.push(homeCoordinates['dfdfd']);
+                markers.push(marker);
             }
 
-            $log.debug($scope.marker);
-//            $scope.mapHomes = homes;
+            $scope.markers = markers;
 
-            //run through each marker?? or
+            addMarkerClickEvent();
 
         },function(reason){
 
         },function(update){
 
         });
-
-//        we need to get all the homes ???? and then display them? for now yeah...
-//        just run through them and add their ID's and Lat, Lng to the map
-
-        //Click through on them should show their details page.
     });
