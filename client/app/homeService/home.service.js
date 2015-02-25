@@ -26,6 +26,18 @@ angular.module('thenHomeApp')
                 });
 
                 return deferred.promise;
+            },
+            getHomes: function(){
+                var deferred = $q.defer();
+
+                $http.get('/api/homes/').success(function (data) {
+                    $log.debug('data',data);
+                    deferred.resolve(data);
+                }).error(function (err) {
+                    deferred.reject(err);
+                });
+
+                return deferred.promise;
             }
         }
     });
