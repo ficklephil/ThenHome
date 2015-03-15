@@ -6,16 +6,45 @@ angular.module('thenHomeApp')
         $scope.placeName = '';
 
         $scope.goBtnHandler = function(){
-            $log.debug('go');
 
             NestoriaService.search($scope.placeName).then(function(data){
-                $log.debug(data);
+
+                setMapCenterPosition(data);
+                setMapMarkers(data);
+
             },function(reason){
 
             },function(update){
 
             });
         };
+
+        function setMapCenterPosition(data){
+
+            $scope.map = { center: { latitude: data.response.locations[0].center_lat,
+                            longitude: data.response.locations[0].center_long }, zoom: 13 };
+        }
+
+        function setMapMarkers(data){
+
+            var markers = [];
+            var listings = data.response.listings;
+
+            for(var index in listings){
+
+                $log.debug(Number(listings[index].latitude));
+                $log.debug(Number(listings[index].longitude));
+
+                var marker = {
+                    latitude: Number(listings[index].latitude),
+                    longitude: Number(listings[index].longitude),
+                    id: listings[index].guid
+                };
+                markers.push(marker);
+            }
+
+            $scope.markers = markers;
+        }
 
         $scope.message = 'Hello';
 
@@ -32,6 +61,9 @@ angular.module('thenHomeApp')
             }
         }
 
+        /**
+         * Get Private sale listings
+         */
         HomeService.getHomes().then(function(data){
 
             var markers = [];
