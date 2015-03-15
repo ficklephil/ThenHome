@@ -1,7 +1,22 @@
 'use strict';
 
 angular.module('thenHomeApp')
-    .controller('SearchCtrl', function ($scope, uiGmapGoogleMapApi, HomeService, $log, $location) {
+    .controller('SearchCtrl', function ($scope, uiGmapGoogleMapApi, HomeService, NestoriaService, $log, $location) {
+
+        $scope.placeName = '';
+
+        $scope.goBtnHandler = function(){
+            $log.debug('go');
+
+            NestoriaService.search($scope.placeName).then(function(data){
+                $log.debug(data);
+            },function(reason){
+
+            },function(update){
+
+            });
+        };
+
         $scope.message = 'Hello';
 
             uiGmapGoogleMapApi.then(function (maps) {

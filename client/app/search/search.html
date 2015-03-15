@@ -1,5 +1,11 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
+<form>
+    <input type="search" ng-model="placeName" placeholder="Enter location">
+    <button ng-click="goBtnHandler()" type="submit" class="btn btn-default">Submit</button>
+
+
+</form>
 <ui-gmap-google-map center='map.center' zoom='map.zoom'>
 
     <!--<ui-gmap-marker coords="marker.coords" idkey="marker.id">-->
@@ -7,6 +13,10 @@
 
     <ui-gmap-markers models="markers" coords="'self'" icon="'icon'" events="markerEvents">
     </ui-gmap-markers>
+
+    <!-- ok so how are we going to get the simple search stuff into here well first let's
+    create a box on the page, input the search details and then have nestoria send us back some stuff! -->
+
 
 </ui-gmap-google-map>
 
